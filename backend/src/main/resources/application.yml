@@ -1,0 +1,39 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: portfolio-backend
+
+  # Default profile: in-memory H2 so `mvn spring-boot:run` works immediately
+  # with zero setup. Switch to the "prod" profile (see application-prod.yml)
+  # for PostgreSQL when you deploy.
+  datasource:
+    url: jdbc:h2:mem:portfoliodb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Comma-separated origins allowed to call this API.
+portfolio:
+  frontend-origins: ${FRONTEND_ORIGINS:http://localhost:5173}
+  admin-key: ${ADMIN_API_KEY:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

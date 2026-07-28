@@ -1,0 +1,16 @@
+# Ignore frontend build and modules
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# Ignore backend build and files
+backend/target/
+backend/.idea/
+backend/*.iml
+backend/.vscode/
+backend/*.log
+
+# Global ignores
+.DS_Store
+Thumbs.db

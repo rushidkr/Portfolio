@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-ink: #10151a;
+  --color-panel: #171f27;
+  --color-panel-2: #1d2731;
+  --color-paper: #e9e4d8;
+  --color-muted: #8b96a8;
+  --color-signal: #c9a227;
+  --color-signal-soft: #e8c65a;
+  --color-verify: #4c9a7e;
+  --color-hairline: #2a343f;
+}
+
+:root.light {
+  --color-ink: #fbfaf8;
+  --color-panel: #f2ebd9;
+  --color-panel-2: #eae1c9;
+  --color-paper: #1d2731;
+  --color-muted: #5e6d82;
+  --color-signal: #a87915;
+  --color-signal-soft: #c99321;
+  --color-verify: #387b62;
+  --color-hairline: #dfd7be;
+}
+
+@theme {
+  --color-ink: var(--color-ink);
+  --color-panel: var(--color-panel);
+  --color-panel-2: var(--color-panel-2);
+  --color-paper: var(--color-paper);
+  --color-muted: var(--color-muted);
+  --color-signal: var(--color-signal);
+  --color-signal-soft: var(--color-signal-soft);
+  --color-verify: var(--color-verify);
+  --color-hairline: var(--color-hairline);
+
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background-color: var(--color-signal);
+  color: var(--color-ink);
+}
+
+/* subtle grain texture so the flat dark background doesn't feel bare */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth transition for theme switches */
+body, header, main, section, nav, a, button, input, textarea, div, span, svg {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
+}
+
+/* Animated floating blobs in background */
+.blob-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  mix-blend-mode: screen;
+  animation: float 20s infinite ease-in-out;
+}
+.light .blob {
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+}
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background-color: var(--color-signal);
+  top: -100px;
+  right: -100px;
+  animation-delay: 0s;
+}
+.blob-2 {
+  width: 600px;
+  height: 600px;
+  background-color: var(--color-verify);
+  bottom: -150px;
+  left: -150px;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+/* Custom View Transition rules for Expanding Circle Theme Toggle */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+.light::view-transition-old(root) {
+  z-index: 9999;
+}
+.light::view-transition-new(root) {
+  z-index: 1;
+}
