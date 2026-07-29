@@ -34,6 +34,16 @@ export default function ProjectCard({ project }) {
             Live ↗
           </a>
         )}
+        {project.title.toLowerCase().includes('durgsetu') && (
+          <a
+            href="/durgsetu-copyright.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-paper transition-colors hover:text-signal"
+          >
+            Copyright ↗
+          </a>
+        )}
       </div>
     </article>
   )

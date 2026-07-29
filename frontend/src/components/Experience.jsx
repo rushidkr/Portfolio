@@ -15,7 +15,19 @@ export default function Experience() {
                 <p className="font-mono text-xs text-muted">{item.period}</p>
                 <p className="mt-1 font-display font-semibold text-paper group-hover/timeline:text-signal transition-colors duration-300">{item.title}</p>
                 <p className="text-sm text-muted">{item.place}</p>
-                <p className="mt-2 text-sm leading-6 text-muted">{item.detail}</p>
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  {item.detail}
+                  {item.detail.includes('LD-20250179413') && (
+                    <a
+                      href="/durgsetu-copyright.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-2 font-mono text-xs text-signal hover:underline"
+                    >
+                      &gt; View Copyright Certificate ↗
+                    </a>
+                  )}
+                </p>
               </div>
             ))}
           </div>
@@ -28,7 +40,19 @@ export default function Experience() {
               <div key={item.title} className="border-l-2 border-hairline pl-5 transition-all duration-300 hover:border-signal hover:pl-7 group/timeline">
                 <p className="font-mono text-xs text-muted">{item.period}</p>
                 <p className="mt-1 font-display font-semibold text-paper group-hover/timeline:text-signal transition-colors duration-300">{item.title}</p>
-                <p className="mt-2 text-sm leading-6 text-muted">{item.detail}</p>
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  {item.detail}
+                  {item.detail.includes('LD-20250179413') && (
+                    <a
+                      href="/durgsetu-copyright.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-2 font-mono text-xs text-signal hover:underline"
+                    >
+                      &gt; View Copyright Certificate ↗
+                    </a>
+                  )}
+                </p>
               </div>
             ))}
           </div>
