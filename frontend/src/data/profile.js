@@ -42,12 +42,6 @@ export const milestones = [
   },
   {
     period: '2025',
-    title: 'Copyright: DurgSetu AI (LD-20250179413)',
-    detail:
-      'Co-authored and registered Government of India Copyright for a prototype system detecting structural risks in historical Maratha forts.',
-  },
-  {
-    period: '2025',
     title: 'CEMS',
     detail: 'Built a full JWT + RBAC event management platform end-to-end across three user roles.',
   },
