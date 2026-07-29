@@ -32,10 +32,18 @@ public class ContactController {
         message.setName(request.getName());
         message.setEmail(request.getEmail());
         message.setMessage(request.getMessage());
-        contactMessageRepository.save(message);
+
+        // Process saving asynchronously in a background thread to prevent blocking
+        java.util.concurrent.CompletableFuture.runAsync(() -> {
+            try {
+                contactMessageRepository.save(message);
+            } catch (Exception e) {
+                System.err.println("Failed to save contact message: " + e.getMessage());
+            }
+        });
 
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.ACCEPTED)
                 .body(ApiResponse.ok("Thanks for reaching out! I'll get back to you soon."));
     }
 

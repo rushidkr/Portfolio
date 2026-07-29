@@ -30,7 +30,15 @@ public class AnalyticsController {
 
         VisitorLog log = new VisitorLog();
         log.setResumeDownload(isResume);
-        visitorLogRepository.save(log);
+
+        // Process saving asynchronously in a background thread to prevent blocking
+        java.util.concurrent.CompletableFuture.runAsync(() -> {
+            try {
+                visitorLogRepository.save(log);
+            } catch (Exception e) {
+                System.err.println("Failed to save visitor log: " + e.getMessage());
+            }
+        });
 
         return ResponseEntity.ok(ApiResponse.ok("Tracked successfully"));
     }
