@@ -56,6 +56,8 @@ export default function Nav() {
     })
   }
 
+  const [isOpen, setIsOpen] = useState(false)
+
   const handleResumeDownload = () => {
     const apiBase = import.meta.env.VITE_API_URL || ''
     fetch(`${apiBase}/api/analytics/track?isResume=true`, {
@@ -74,11 +76,13 @@ export default function Nav() {
             /{profile.role.toLowerCase().replace(/\s+/g, '-')}
           </span>
         </a>
-        <nav className="flex items-center gap-6 font-mono text-xs text-muted">
-          <a href="#projects" className="hidden transition-colors hover:text-paper sm:inline">
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden items-center gap-6 font-mono text-xs text-muted sm:flex">
+          <a href="#projects" className="transition-colors hover:text-paper">
             Projects
           </a>
-          <a href="#contact" className="hidden transition-colors hover:text-paper sm:inline">
+          <a href="#contact" className="transition-colors hover:text-paper">
             Contact
           </a>
           <a
@@ -105,7 +109,74 @@ export default function Nav() {
             )}
           </button>
         </nav>
+
+        {/* Mobile Hamburger Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+          className="flex h-8 w-8 items-center justify-center rounded text-muted hover:text-paper sm:hidden cursor-pointer"
+        >
+          {isOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          )}
+        </button>
       </div>
-    </header>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <nav className="border-t border-hairline bg-panel/95 px-6 py-4 flex flex-col gap-4 font-mono text-sm text-muted sm:hidden backdrop-blur animate-fade-in">
+          <a
+            href="#projects"
+            onClick={() => setIsOpen(false)}
+            className="py-1 transition-colors hover:text-paper"
+          >
+            &gt; Projects
+          </a>
+          <a
+            href="#contact"
+            onClick={() => setIsOpen(false)}
+            className="py-1 transition-colors hover:text-paper"
+          >
+            &gt; Contact
+          </a>
+          <div className="flex items-center justify-between py-2 border-t border-hairline/40 mt-1">
+            <a
+              href={profile.resumeUrl}
+              download="Rushiprasad_Daitkar_Resume.pdf"
+              onClick={() => {
+                handleResumeDownload()
+                setIsOpen(false)
+              }}
+              className="rounded border border-hairline px-4 py-2 text-paper text-center transition-colors hover:border-signal hover:text-signal w-1/2 mr-2"
+            >
+              Resume
+            </a>
+            <button
+              onClick={(e) => {
+                toggleTheme(e)
+                setIsOpen(false)
+              }}
+              className="flex items-center justify-center rounded-full p-2 border border-hairline text-muted hover:text-paper w-12 h-12 cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m0 13.5V21m8.966-8.966h-2.25m-13.5 0h-2.25m15.034-7.034-1.591 1.591M4.929 19.071l1.591-1.591m0-12.728L4.93 4.93m12.727 12.727 1.591 1.591M12 18.75a6.75 6.75 0 1 0 0-13.5 6.75 6.75 0 0 0 0 13.5Z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </nav>
+      )}
   )
 }
