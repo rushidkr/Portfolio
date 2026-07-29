@@ -18,7 +18,7 @@ export const education = [
     title: "Bachelor's Degree in Computer Engineering",
     place: "SNJB's College of Engineering, Chandwad (Nashik, Maharashtra)",
     detail:
-      'CGPA: 7.59. Specialized in Java Full-Stack Development, Backend Development, REST API Development, Secure Application Development, Database Management, and Computer Vision.',
+      'CGPA: 7.59. Co-authored and holds a Government of India Copyright (Reg No. LD-20250179413) for DurgSetu AI, an AI system for UNESCO Heritage Maratha fort conservation. Specialized in Java Full-Stack, Backend development, REST APIs, and Computer Vision.',
   },
 ]
 
@@ -31,7 +31,7 @@ export const milestones = [
   {
     period: '2025 — 2026',
     title: 'DurgSetu AI',
-    detail: 'Led backend/documentation work on a 4-person ML/CV academic project, guided by Prof. Y. S. Patil.',
+    detail: 'Co-authored and registered Government of India Copyright (No. LD-20250179413) for a computer-vision prototype detecting structural risks in UNESCO Heritage Maratha forts.',
   },
   {
     period: '2025',
